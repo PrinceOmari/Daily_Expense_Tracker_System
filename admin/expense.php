@@ -1,17 +1,19 @@
-<!--
-=========================================================
-* Material Dashboard Dark Edition - v2.1.0
-=========================================================
+<?php
+session_start();
+require 'admin_db/db_connection.php';
+// CHECK USER IF LOGGED IN
+if(isset($_SESSION['admin_email']) && !empty($_SESSION['admin_email'])){
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-dark
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
+$admin_email = $_SESSION['admin_email'];
+$get_admin_data = mysqli_query($db_connection, "SELECT * FROM `admin` WHERE admin_email = '$admin_email'");
+$adminData =  mysqli_fetch_assoc($get_admin_data);
 
-* Coded by www.creative-tim.com
+}else{
+header('Location: admin_logout.php');
+exit;
+}
+?>
 
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
